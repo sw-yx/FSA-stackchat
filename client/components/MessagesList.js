@@ -2,19 +2,44 @@ import React, { Component } from 'react';
 import Message from './Message';
 import NewMessageEntry from './NewMessageEntry';
 import axios from 'axios';
+import store, {gotMessagesFromServer, fetchMessages} from '../store';
+import ReactDOM from 'react-dom';
+
+
+let unsubscribe;
 
 export default class MessagesList extends Component {
 
   constructor () {
     super();
-    this.state = { messages: [] };
+    this.state = store.getState();
   }
 
   componentDidMount () {
-    axios.get('/api/messages')
-      .then(res => res.data)
-      .then(messages => this.setState({ messages }));
+   unsubscribe = store.subscribe(() => {
+      this.setState(store.getState());
+    })
+
+    const thunk = fetchMessages();
+    store.dispatch(thunk);
+    this.scrollToBottom();
   }
+
+
+  componentWillUnmount() {
+    unsubscribe();
+  }
+
+  scrollToBottom = () => {
+    const node = ReactDOM.findDOMNode(this.messagesEnd);
+    node.scrollIntoView({ behavior: "smooth" });
+  }
+  
+  
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+  
 
   render () {
 
@@ -24,10 +49,14 @@ export default class MessagesList extends Component {
 
     return (
       <div>
-        <ul className="media-list">
+        <ul className="media-list" id="medialist">
           { filteredMessages.map(message => <Message message={message} key={message.id} />) }
+          <div style={{ float:"left", clear: "both" }}
+             ref={(el) => { this.messagesEnd = el; }}>
+          </div>
         </ul>
-        <NewMessageEntry />
+        <NewMessageEntry channelId={channelId}/>
+        
       </div>
     );
   }
