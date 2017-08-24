@@ -22,6 +22,7 @@
     "pg-hstore": "^2.3.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-emojione": "^3.1.10",
     "react-router-dom": "^4.0.0",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",

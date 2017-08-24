@@ -46,7 +46,8 @@ export default class NewMessageEntry extends Component {
             className="form-control"
             type="text"
             name="content"
-            placeholder="Say something nice..."
+            placeholder="Say something nice... you can also use emojis :wink:"
+            value = {this.state.newMessageEntry}
             onChange={e => this.handleChange(e.target.value)}
           />
           <span className="input-group-btn">

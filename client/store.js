@@ -65,7 +65,7 @@ function reducer (state = initialState, action) {
         return Object.assign({}, state, { newMessageEntry: action.newMessageEntry });
 
     case RECEIVED_NEW_MESSAGE:
-        return Object.assign({}, state, { messages: state.messages.concat(action.message) });
+        return Object.assign({}, state, { messages: state.messages.concat(action.message), newMessageEntry: ''});
     
     case NEW_USER: 
         return Object.assign({}, state, {name: action.name});

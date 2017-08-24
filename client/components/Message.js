@@ -1,4 +1,5 @@
 import React from 'react';
+import {emojify} from 'react-emojione';
 
 export default function Message (props) {
 
@@ -13,7 +14,7 @@ export default function Message (props) {
       </div>
       <div className="media-body">
         <h4 className="media-heading">{ message.author.name }</h4>
-        { message.content }
+        { emojify(message.content) }
       </div>
     </li>
   );
