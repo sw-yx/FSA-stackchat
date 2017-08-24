@@ -1,6 +1,6 @@
 # StackChat
 
-A chatty chat appy app.
+A chatty chat appy app. Deployed at <https://swyx-stackchat.herokuapp.com>
 
 ## Setting up
 
